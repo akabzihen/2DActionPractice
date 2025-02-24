@@ -20,7 +20,7 @@ private:
 	int player_frame_ = 0;
 	int frame_adjust_ = 0;
 
-	int player_image_[24];
+	int player_image_[24] = {};
 
 	int player_starting_frame_ = 0;
 	int player_last_frame_ = 0;
