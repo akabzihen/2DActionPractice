@@ -87,7 +87,7 @@ void PlayerStateWalk::Update(float sec)
 
 void PlayerStateWalk::OnEnter(PlayerStateBase* prev_steta)
 {
-    animation_module_.PlayAnimationPlayerRightWalk(12, 15);
+    player_->GetAnimationModule()->PlayAnimationPlayerRightWalk(12, 15);
     //animation_module_.SetRGB(125, 255, 0);
 }
 
