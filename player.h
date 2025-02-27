@@ -30,6 +30,7 @@ public:
 	bool GetIsJumping() { return is_jumping_; };
 	void FlagIsJumping();
 	void ChangeDirection(int direction);
+	AnimationModule* GetAnimationModule() { return &animation_module_; };
 
 	//private:
 	// キャラクタをマップとの当たり判定を考慮しながら移動する
