@@ -8,12 +8,8 @@ public:
 	void Update(float sec);
 	void Render();
 
-	void PlayAnimationIdle(int player_starting_frame, int player_last_frame);
-	void PlayAnimationRightWalk();
-	void PlayAnimationPlayerRightWalk(int player_starting_frame, int player_last_frame);
-	void PlayAnimationPlayerLeftWalk();
-	//void SetFrame(int frame);
-	//void SetStartingFrame(int frame);
+	void PlayAnimationOfPlayer(int player_starting_frame, int player_last_frame);
+	
 	void SetRGB(int r, int g, int b);
 
 private:

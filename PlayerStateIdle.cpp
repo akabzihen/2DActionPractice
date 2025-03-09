@@ -81,7 +81,33 @@ void PlayerStateIdle::Update(float sec)
 
 void PlayerStateIdle::OnEnter(PlayerStateBase* prev_steta)
 {
-    //animation_module_.PlayAnimationIdle(12, 12);
+    Player* player = Player::Instance();
+    if (!player) {
+        return;
+    }
+
+    //InputManager* input_manager = InputManager::Instance();
+    //if (!input_manager) {
+    //    return;
+    //}
+
+    //// プレイヤーの向きを変更
+    //if (input_manager->IsTrigger(PAD_INPUT_LEFT)) {
+    //    player->ChangeDirection(-1);
+    //}
+    //if (input_manager->IsTrigger(PAD_INPUT_RIGHT)) {
+    //    player->ChangeDirection(1);
+    //}
+
+
+    // プレイヤーの向きにより再生するアニメーションを変更
+    if (player->GetDirection() == 1) {
+        player_->GetAnimationModule()->PlayAnimationOfPlayer(0, 1);
+    }
+    if (player->GetDirection() == -1) {
+        player_->GetAnimationModule()->PlayAnimationOfPlayer(2, 3);
+    }
+
 }
 
 void PlayerStateIdle::OnLeave(PlayerStateBase* next_state)

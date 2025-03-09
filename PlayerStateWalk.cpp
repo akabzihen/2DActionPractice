@@ -66,11 +66,11 @@ void PlayerStateWalk::Update(float sec)
     // 左右の移動を見る
     if (input_manager->IsActive(PAD_INPUT_LEFT)) {
         move_x -= SPEED;
-        player->ChangeDirection(-1);
+        //player->ChangeDirection(-1);
     }
     if (input_manager->IsActive(PAD_INPUT_RIGHT)) {
         move_x += SPEED;
-        player->ChangeDirection(1);
+        //player->ChangeDirection(1);
     }
 
     //player->FallingProcess();
@@ -87,8 +87,33 @@ void PlayerStateWalk::Update(float sec)
 
 void PlayerStateWalk::OnEnter(PlayerStateBase* prev_steta)
 {
-    player_->GetAnimationModule()->PlayAnimationPlayerRightWalk(12, 15);
-    //animation_module_.SetRGB(125, 255, 0);
+    Player* player = Player::Instance();
+    if (!player) {
+        return;
+    }
+    
+    InputManager* input_manager = InputManager::Instance();
+    if (!input_manager) {
+        return;
+    }
+
+    // プレイヤーの向きを変更
+    if (input_manager->IsTrigger(PAD_INPUT_LEFT)) {
+        player->ChangeDirection(-1);
+    }
+    if (input_manager->IsTrigger(PAD_INPUT_RIGHT)) {
+        player->ChangeDirection(1);
+    }
+
+
+    // プレイヤーの向きにより再生するアニメーションを変更
+    if (player->GetDirection() == 1) {
+        player_->GetAnimationModule()->PlayAnimationOfPlayer(8, 11);
+    }
+    if (player->GetDirection() == -1) {
+        player_->GetAnimationModule()->PlayAnimationOfPlayer(12, 15);
+    }
+
 }
 
 void PlayerStateWalk::OnLeave(PlayerStateBase* next_state)
