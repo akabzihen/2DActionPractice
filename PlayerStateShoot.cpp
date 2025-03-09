@@ -63,6 +63,14 @@ void PlayerStateShoot::Update(float sec)
         return;
     }
 
+    // プレイヤーの向きを変更
+    if (input_manager->IsTrigger(PAD_INPUT_LEFT)) {
+        player->ChangeDirection(-1);
+    }
+    if (input_manager->IsTrigger(PAD_INPUT_RIGHT)) {
+        player->ChangeDirection(1);
+    }
+
     float move_x, move_y;
 
     // 移動量の初期化
@@ -72,11 +80,11 @@ void PlayerStateShoot::Update(float sec)
     // 左右の移動を見る
     if (input_manager->IsActive(PAD_INPUT_LEFT)) {
         move_x -= SPEED;
-        player->ChangeDirection(-1);
+        //player->ChangeDirection(-1);
     }
     if (input_manager->IsActive(PAD_INPUT_RIGHT)) {
         move_x += SPEED;
-        player->ChangeDirection(1);
+        //player->ChangeDirection(1);
     }
 
     player->FallingProcess();
@@ -98,6 +106,33 @@ void PlayerStateShoot::Update(float sec)
 
 void PlayerStateShoot::OnEnter(PlayerStateBase* prev_steta)
 {
+    Player* player = Player::Instance();
+    if (!player) {
+        return;
+    }
+
+    InputManager* input_manager = InputManager::Instance();
+    if (!input_manager) {
+        return;
+    }
+
+    // プレイヤーの向きを変更
+    if (input_manager->IsTrigger(PAD_INPUT_LEFT)) {
+        player->ChangeDirection(-1);
+    }
+    if (input_manager->IsTrigger(PAD_INPUT_RIGHT)) {
+        player->ChangeDirection(1);
+    }
+
+
+    // プレイヤーの向きにより再生するアニメーションを変更
+    if (player->GetDirection() == 1) {
+        player_->GetAnimationModule()->PlayAnimationOfPlayer(16, 19);
+    }
+    if (player->GetDirection() == -1) {
+        player_->GetAnimationModule()->PlayAnimationOfPlayer(20, 23);
+    }
+
 }
 
 void PlayerStateShoot::OnLeave(PlayerStateBase* next_state)
