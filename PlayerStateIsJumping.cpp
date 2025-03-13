@@ -88,6 +88,9 @@ void PlayerStateIsJumping::OnEnter(PlayerStateBase* prev_steta)
     if (input_manager->IsTrigger(PAD_INPUT_A)) {
         player->ChangeDownSpeed(JUMP_POWER);
     }
+
+    player_->GetAnimationModule()->PlayAnimationOfPlayer(4, 7);
+
 }
 
 void PlayerStateIsJumping::OnLeave(PlayerStateBase* next_state)
